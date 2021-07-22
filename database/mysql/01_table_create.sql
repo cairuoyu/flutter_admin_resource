@@ -1,6 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
--- Host: cairuoyu.com    Database: p4
+-- author: cairuoyu
+-- github: https://github.com/cairuoyu/flutter_admin_resource
+-- Host: cairuoyu.com    Database: flutter_admin
 -- ------------------------------------------------------
 -- Server version	8.0.20
 
@@ -161,29 +163,6 @@ CREATE TABLE `menu` (
   `update_time` datetime DEFAULT NULL,
   `order_by` int DEFAULT NULL,
   `subsystem_id` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `menu_demo`
---
-
-DROP TABLE IF EXISTS `menu_demo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `menu_demo` (
-  `id` varchar(254) NOT NULL,
-  `name` varchar(254) DEFAULT NULL,
-  `name_en` varchar(254) DEFAULT NULL,
-  `icon` varchar(45) DEFAULT NULL,
-  `pid` varchar(254) DEFAULT NULL,
-  `url` varchar(254) DEFAULT NULL,
-  `module` varchar(254) DEFAULT NULL,
-  `remark` varchar(254) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  `order_by` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -507,4 +486,4 @@ CREATE TABLE `video` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-01  9:10:03
+-- Dump completed on 2021-07-22 15:09:04
