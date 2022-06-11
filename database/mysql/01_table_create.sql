@@ -1,489 +1,351 @@
--- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
---
 -- author: cairuoyu
 -- github: https://github.com/cairuoyu/flutter_admin_resource
 -- Host: cairuoyu.com    Database: flutter_admin
 -- ------------------------------------------------------
 -- Server version	8.0.20
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+create table article
+(
+    id           varchar(36)  not null
+        primary key,
+    title        varchar(254) null,
+    title_sub    varchar(254) null,
+    author       varchar(36)  null,
+    status       varchar(20)  null,
+    publish_time varchar(20)  null,
+    order_by     int          null,
+    create_time  datetime     null,
+    update_time  datetime     null,
+    creater_id   varchar(36)  null,
+    update_id    varchar(36)  null,
+    file_url     varchar(254) null
+);
 
---
--- Table structure for table `article`
---
+create table dept
+(
+    id          varchar(36)  not null
+        primary key,
+    name        varchar(254) null,
+    name_short  varchar(254) null,
+    pid         varchar(36)  null,
+    header_id   varchar(36)  null,
+    fun         varchar(2)   null,
+    remark      varchar(254) null,
+    order_by    int          null,
+    create_time datetime     null,
+    update_time datetime     null,
+    creater_id  varchar(36)  null,
+    update_id   varchar(36)  null
+);
 
-DROP TABLE IF EXISTS `article`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `article` (
-  `id` varchar(36) NOT NULL,
-  `title` varchar(254) DEFAULT NULL,
-  `title_sub` varchar(254) DEFAULT NULL,
-  `author` varchar(36) DEFAULT NULL,
-  `status` varchar(20) DEFAULT NULL,
-  `publish_time` varchar(20) DEFAULT NULL,
-  `order_by` int DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  `creater_id` varchar(36) DEFAULT NULL,
-  `update_id` varchar(36) DEFAULT NULL,
-  `file_url` varchar(254) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+create table dict
+(
+    id          varchar(36) not null
+        primary key,
+    code        varchar(45) null,
+    name        varchar(45) null,
+    create_time datetime    null,
+    update_time datetime    null,
+    creater_id  varchar(45) null,
+    state       char        null
+);
 
---
--- Table structure for table `dept`
---
+create table dict_item
+(
+    id          varchar(36) not null
+        primary key,
+    dict_id     varchar(36) null,
+    code        varchar(45) null,
+    name        varchar(45) null,
+    create_time datetime    null,
+    update_time datetime    null,
+    creater_id  varchar(36) null
+);
 
-DROP TABLE IF EXISTS `dept`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `dept` (
-  `id` varchar(36) NOT NULL,
-  `name` varchar(254) DEFAULT NULL,
-  `name_short` varchar(254) DEFAULT NULL,
-  `pid` varchar(36) DEFAULT NULL,
-  `header_id` varchar(36) DEFAULT NULL,
-  `fun` varchar(2) DEFAULT NULL,
-  `remark` varchar(254) DEFAULT NULL,
-  `order_by` int DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  `creater_id` varchar(36) DEFAULT NULL,
-  `update_id` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+create table file
+(
+    id          varchar(36)  not null
+        primary key,
+    bid         varchar(36)  null,
+    name        varchar(200) null,
+    path        varchar(200) null,
+    type        varchar(45)  null,
+    size        int          null,
+    create_time datetime     null,
+    creater_id  varchar(36)  null
+);
 
---
--- Table structure for table `dict`
---
+create table image
+(
+    id          varchar(36)  not null
+        primary key,
+    title       varchar(145) null,
+    category_id varchar(36)  null,
+    thumbs      int          null,
+    memo        varchar(245) null,
+    url         varchar(245) null,
+    create_time datetime     null,
+    creater_id  varchar(36)  null
+);
 
-DROP TABLE IF EXISTS `dict`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `dict` (
-  `id` varchar(36) NOT NULL,
-  `code` varchar(45) DEFAULT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  `creater_id` varchar(45) DEFAULT NULL,
-  `state` char(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+create table menu
+(
+    id           varchar(36)  not null
+        primary key,
+    name         varchar(254) null,
+    name_en      varchar(254) null,
+    icon         varchar(45)  null,
+    pid          varchar(254) null,
+    url          varchar(254) null,
+    module       varchar(254) null,
+    remark       varchar(254) null,
+    create_time  datetime     null,
+    update_time  datetime     null,
+    order_by     int          null,
+    subsystem_id varchar(36)  null
+);
 
---
--- Table structure for table `dict_item`
---
+create table message
+(
+    id               varchar(36)                         not null
+        primary key,
+    title            varchar(200)                        null,
+    content          varchar(2000)                       null,
+    state            varchar(1)                          null,
+    comment_count    int                                 null,
+    appreciate_count int                                 null,
+    creater_id       varchar(36)                         null,
+    create_time      timestamp default CURRENT_TIMESTAMP null,
+    update_time      timestamp                           null
+);
 
-DROP TABLE IF EXISTS `dict_item`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `dict_item` (
-  `id` varchar(36) NOT NULL,
-  `dict_id` varchar(36) DEFAULT NULL,
-  `code` varchar(45) DEFAULT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  `creater_id` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+create table message_replay
+(
+    id          varchar(36)   not null
+        primary key,
+    message_id  varchar(36)   null,
+    content     varchar(1000) null,
+    create_time datetime      null,
+    creater_id  varchar(36)   null
+);
 
---
--- Table structure for table `file`
---
+create table person
+(
+    id          varchar(254) not null
+        primary key,
+    user_id     varchar(254) null,
+    nick_name   varchar(254) null,
+    avatar_url  varchar(254) null,
+    gender      varchar(254) null,
+    country     varchar(254) null,
+    province    varchar(254) null,
+    city        varchar(254) null,
+    name        varchar(254) null,
+    school      varchar(254) null,
+    major       varchar(254) null,
+    birthday    varchar(254) null,
+    entrance    varchar(254) null,
+    hometown    varchar(254) null,
+    memo        varchar(254) null,
+    dept_id     varchar(254) null,
+    create_time datetime     null,
+    update_time datetime     null
+);
 
-DROP TABLE IF EXISTS `file`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `file` (
-  `id` varchar(36) NOT NULL,
-  `bid` varchar(36) DEFAULT NULL,
-  `name` varchar(200) DEFAULT NULL,
-  `path` varchar(200) DEFAULT NULL,
-  `type` varchar(45) DEFAULT NULL,
-  `size` int DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `creater_id` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+create table role
+(
+    id          varchar(36)  not null
+        primary key,
+    name        varchar(145) null,
+    name_en     varchar(145) null,
+    create_time datetime     null,
+    creater_id  varchar(45)  null,
+    update_time datetime     null
+);
 
---
--- Table structure for table `image`
---
+create table role_menu
+(
+    menu_id     varchar(45) not null,
+    role_id     varchar(45) not null,
+    create_time datetime    null,
+    create_id   varchar(45) null,
+    primary key (menu_id, role_id)
+);
 
-DROP TABLE IF EXISTS `image`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `image` (
-  `id` varchar(36) NOT NULL,
-  `title` varchar(145) DEFAULT NULL,
-  `category_id` varchar(36) DEFAULT NULL,
-  `thumbs` int DEFAULT NULL,
-  `memo` varchar(245) DEFAULT NULL,
-  `url` varchar(245) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `creater_id` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+create table role_user
+(
+    user_id     varchar(45) not null,
+    role_id     varchar(45) not null,
+    create_time datetime    null,
+    create_id   varchar(45) null,
+    primary key (user_id, role_id)
+);
 
---
--- Table structure for table `menu`
---
+create table s_area_age_gender
+(
+    id       text null,
+    area     text null,
+    age      int  null,
+    age_g1   int  null,
+    age_g2   int  null,
+    age1     int  null,
+    age1_g1  int  null,
+    age1_g2  int  null,
+    age2     int  null,
+    age2_g1  int  null,
+    age2_g2  int  null,
+    age3     int  null,
+    age3_g1  int  null,
+    age3_g2  int  null,
+    age4     int  null,
+    age4_g1  int  null,
+    age4_g2  int  null,
+    age5     int  null,
+    age5_g1  int  null,
+    age5_g2  int  null,
+    age6     int  null,
+    age6_g1  int  null,
+    age6_g2  int  null,
+    age7     int  null,
+    age7_g1  int  null,
+    age7_g2  int  null,
+    age8     int  null,
+    age8_g1  int  null,
+    age8_g2  int  null,
+    age9     int  null,
+    age9_g1  int  null,
+    age9_g2  int  null,
+    age10    int  null,
+    age10_g1 int  null,
+    age10_g2 int  null,
+    age11    int  null,
+    age11_g1 int  null,
+    age11_g2 int  null,
+    age12    int  null,
+    age12_g1 int  null,
+    age12_g2 int  null,
+    age13    int  null,
+    age13_g1 int  null,
+    age13_g2 int  null,
+    age14    int  null,
+    age14_g1 int  null,
+    age14_g2 int  null,
+    age15    int  null,
+    age15_g1 int  null,
+    age15_g2 int  null,
+    age16    int  null,
+    age16_g1 int  null,
+    age16_g2 int  null,
+    age17    int  null,
+    age17_g1 int  null,
+    age17_g2 int  null,
+    age18    int  null,
+    age18_g1 int  null,
+    age18_g2 int  null,
+    age19    int  null,
+    age19_g1 int  null,
+    age19_g2 int  null,
+    age20    int  null,
+    age20_g1 int  null,
+    age20_g2 int  null,
+    age21    int  null,
+    age21_g1 int  null,
+    age21_g2 int  null,
+    age22    int  null,
+    age22_g1 int  null,
+    age22_g2 int  null
+);
 
-DROP TABLE IF EXISTS `menu`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `menu` (
-  `id` varchar(36) NOT NULL,
-  `name` varchar(254) DEFAULT NULL,
-  `name_en` varchar(254) DEFAULT NULL,
-  `icon` varchar(45) DEFAULT NULL,
-  `pid` varchar(254) DEFAULT NULL,
-  `url` varchar(254) DEFAULT NULL,
-  `module` varchar(254) DEFAULT NULL,
-  `remark` varchar(254) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  `order_by` int DEFAULT NULL,
-  `subsystem_id` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+create table setting_default_tab
+(
+    id           varchar(36)  not null
+        primary key,
+    name         varchar(254) null,
+    name_en      varchar(254) null,
+    icon         varchar(45)  null,
+    user_id      varchar(36)  null,
+    url          varchar(254) null,
+    module       varchar(254) null,
+    remark       varchar(254) null,
+    order_by     int          null,
+    subsystem_id varchar(36)  null,
+    create_time  datetime     null,
+    update_time  datetime     null
+);
 
---
--- Table structure for table `message`
---
+create table subsystem
+(
+    id          varchar(36)  not null
+        primary key,
+    code        varchar(45)  null,
+    name        varchar(200) null,
+    url         varchar(200) null,
+    order_by    varchar(500) null,
+    remark      varchar(500) null,
+    state       char         null,
+    create_time datetime     null,
+    update_time datetime     null,
+    creater_id  varchar(36)  null,
+    update_id   varchar(36)  null
+);
 
-DROP TABLE IF EXISTS `message`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `message` (
-  `id` varchar(36) NOT NULL,
-  `title` varchar(200) DEFAULT NULL,
-  `content` varchar(2000) DEFAULT NULL,
-  `state` varchar(1) DEFAULT NULL,
-  `comment_count` int DEFAULT NULL,
-  `appreciate_count` int DEFAULT NULL,
-  `creater_id` varchar(36) DEFAULT NULL,
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+create table sys_log
+(
+    id             varchar(254) not null comment '日志ID'
+        primary key,
+    user_id        varchar(254) null comment '用户名字',
+    user_ip        varchar(254) null comment '用户IP',
+    request_class  varchar(254) null comment '请求方法',
+    request_method varchar(254) null comment '请求方法',
+    request_desc   varchar(254) null comment '方法描述',
+    create_time    datetime     null
+);
 
---
--- Table structure for table `message_replay`
---
+create table user
+(
+    id          varchar(254) not null
+        primary key,
+    user_name   varchar(254) null,
+    password    varchar(254) null,
+    create_time datetime     null,
+    update_time datetime     null,
+    face        text         null
+);
 
-DROP TABLE IF EXISTS `message_replay`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `message_replay` (
-  `id` varchar(36) NOT NULL,
-  `message_id` varchar(36) DEFAULT NULL,
-  `content` varchar(1000) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `creater_id` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+create table user_info
+(
+    id          varchar(254) not null
+        primary key,
+    user_id     varchar(254) null,
+    user_name   varchar(245) null,
+    nick_name   varchar(254) null,
+    avatar_url  varchar(254) null,
+    gender      varchar(254) null,
+    country     varchar(254) null,
+    province    varchar(254) null,
+    city        varchar(254) null,
+    name        varchar(254) null,
+    school      varchar(254) null,
+    major       varchar(254) null,
+    birthday    varchar(20)  null,
+    entrance    varchar(254) null,
+    hometown    varchar(254) null,
+    memo        varchar(254) null,
+    dept_id     varchar(254) null,
+    create_time datetime     null,
+    update_time datetime     null
+);
 
---
--- Table structure for table `person`
---
+create table video
+(
+    id          varchar(36)  not null
+        primary key,
+    title       varchar(145) null,
+    category_id varchar(36)  null,
+    thumbs      int          null,
+    memo        varchar(245) null,
+    url         varchar(245) null,
+    create_time datetime     null,
+    creater_id  varchar(36)  null
+);
 
-DROP TABLE IF EXISTS `person`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `person` (
-  `id` varchar(254) NOT NULL,
-  `user_id` varchar(254) DEFAULT NULL,
-  `nick_name` varchar(254) DEFAULT NULL,
-  `avatar_url` varchar(254) DEFAULT NULL,
-  `gender` varchar(254) DEFAULT NULL,
-  `country` varchar(254) DEFAULT NULL,
-  `province` varchar(254) DEFAULT NULL,
-  `city` varchar(254) DEFAULT NULL,
-  `name` varchar(254) DEFAULT NULL,
-  `school` varchar(254) DEFAULT NULL,
-  `major` varchar(254) DEFAULT NULL,
-  `birthday` varchar(254) DEFAULT NULL,
-  `entrance` varchar(254) DEFAULT NULL,
-  `hometown` varchar(254) DEFAULT NULL,
-  `memo` varchar(254) DEFAULT NULL,
-  `dept_id` varchar(254) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `role`
---
-
-DROP TABLE IF EXISTS `role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `role` (
-  `id` varchar(36) NOT NULL,
-  `name` varchar(145) DEFAULT NULL,
-  `name_en` varchar(145) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `creater_id` varchar(45) DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `role_menu`
---
-
-DROP TABLE IF EXISTS `role_menu`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `role_menu` (
-  `menu_id` varchar(45) NOT NULL,
-  `role_id` varchar(45) NOT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `create_id` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`menu_id`,`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `role_user`
---
-
-DROP TABLE IF EXISTS `role_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `role_user` (
-  `user_id` varchar(45) NOT NULL,
-  `role_id` varchar(45) NOT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `create_id` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`user_id`,`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `s_area_age_gender`
---
-
-DROP TABLE IF EXISTS `s_area_age_gender`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `s_area_age_gender` (
-  `id` text,
-  `area` text,
-  `age` int DEFAULT NULL,
-  `age_g1` int DEFAULT NULL,
-  `age_g2` int DEFAULT NULL,
-  `age1` int DEFAULT NULL,
-  `age1_g1` int DEFAULT NULL,
-  `age1_g2` int DEFAULT NULL,
-  `age2` int DEFAULT NULL,
-  `age2_g1` int DEFAULT NULL,
-  `age2_g2` int DEFAULT NULL,
-  `age3` int DEFAULT NULL,
-  `age3_g1` int DEFAULT NULL,
-  `age3_g2` int DEFAULT NULL,
-  `age4` int DEFAULT NULL,
-  `age4_g1` int DEFAULT NULL,
-  `age4_g2` int DEFAULT NULL,
-  `age5` int DEFAULT NULL,
-  `age5_g1` int DEFAULT NULL,
-  `age5_g2` int DEFAULT NULL,
-  `age6` int DEFAULT NULL,
-  `age6_g1` int DEFAULT NULL,
-  `age6_g2` int DEFAULT NULL,
-  `age7` int DEFAULT NULL,
-  `age7_g1` int DEFAULT NULL,
-  `age7_g2` int DEFAULT NULL,
-  `age8` int DEFAULT NULL,
-  `age8_g1` int DEFAULT NULL,
-  `age8_g2` int DEFAULT NULL,
-  `age9` int DEFAULT NULL,
-  `age9_g1` int DEFAULT NULL,
-  `age9_g2` int DEFAULT NULL,
-  `age10` int DEFAULT NULL,
-  `age10_g1` int DEFAULT NULL,
-  `age10_g2` int DEFAULT NULL,
-  `age11` int DEFAULT NULL,
-  `age11_g1` int DEFAULT NULL,
-  `age11_g2` int DEFAULT NULL,
-  `age12` int DEFAULT NULL,
-  `age12_g1` int DEFAULT NULL,
-  `age12_g2` int DEFAULT NULL,
-  `age13` int DEFAULT NULL,
-  `age13_g1` int DEFAULT NULL,
-  `age13_g2` int DEFAULT NULL,
-  `age14` int DEFAULT NULL,
-  `age14_g1` int DEFAULT NULL,
-  `age14_g2` int DEFAULT NULL,
-  `age15` int DEFAULT NULL,
-  `age15_g1` int DEFAULT NULL,
-  `age15_g2` int DEFAULT NULL,
-  `age16` int DEFAULT NULL,
-  `age16_g1` int DEFAULT NULL,
-  `age16_g2` int DEFAULT NULL,
-  `age17` int DEFAULT NULL,
-  `age17_g1` int DEFAULT NULL,
-  `age17_g2` int DEFAULT NULL,
-  `age18` int DEFAULT NULL,
-  `age18_g1` int DEFAULT NULL,
-  `age18_g2` int DEFAULT NULL,
-  `age19` int DEFAULT NULL,
-  `age19_g1` int DEFAULT NULL,
-  `age19_g2` int DEFAULT NULL,
-  `age20` int DEFAULT NULL,
-  `age20_g1` int DEFAULT NULL,
-  `age20_g2` int DEFAULT NULL,
-  `age21` int DEFAULT NULL,
-  `age21_g1` int DEFAULT NULL,
-  `age21_g2` int DEFAULT NULL,
-  `age22` int DEFAULT NULL,
-  `age22_g1` int DEFAULT NULL,
-  `age22_g2` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `subsystem`
---
-
-DROP TABLE IF EXISTS `subsystem`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `subsystem` (
-  `id` varchar(36) NOT NULL,
-  `code` varchar(45) DEFAULT NULL,
-  `name` varchar(200) DEFAULT NULL,
-  `url` varchar(200) DEFAULT NULL,
-  `order_by` varchar(500) DEFAULT NULL,
-  `remark` varchar(500) DEFAULT NULL,
-  `state` char(1) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  `creater_id` varchar(36) DEFAULT NULL,
-  `update_id` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `sys_log`
---
-
-DROP TABLE IF EXISTS `sys_log`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `sys_log` (
-  `id` varchar(254) NOT NULL COMMENT '日志ID',
-  `user_id` varchar(254) DEFAULT NULL COMMENT '用户名字',
-  `user_ip` varchar(254) DEFAULT NULL COMMENT '用户IP',
-  `request_class` varchar(254) DEFAULT NULL COMMENT '请求方法',
-  `request_method` varchar(254) DEFAULT NULL COMMENT '请求方法',
-  `request_desc` varchar(254) DEFAULT NULL COMMENT '方法描述',
-  `create_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
-  `id` varchar(254) NOT NULL,
-  `user_name` varchar(254) DEFAULT NULL,
-  `password` varchar(254) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `user_info`
---
-
-DROP TABLE IF EXISTS `user_info`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user_info` (
-  `id` varchar(254) NOT NULL,
-  `user_id` varchar(254) DEFAULT NULL,
-  `user_name` varchar(245) DEFAULT NULL,
-  `nick_name` varchar(254) DEFAULT NULL,
-  `avatar_url` varchar(254) DEFAULT NULL,
-  `gender` varchar(254) DEFAULT NULL,
-  `country` varchar(254) DEFAULT NULL,
-  `province` varchar(254) DEFAULT NULL,
-  `city` varchar(254) DEFAULT NULL,
-  `name` varchar(254) DEFAULT NULL,
-  `school` varchar(254) DEFAULT NULL,
-  `major` varchar(254) DEFAULT NULL,
-  `birthday` varchar(20) DEFAULT NULL,
-  `entrance` varchar(254) DEFAULT NULL,
-  `hometown` varchar(254) DEFAULT NULL,
-  `memo` varchar(254) DEFAULT NULL,
-  `dept_id` varchar(254) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `video`
---
-
-DROP TABLE IF EXISTS `video`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `video` (
-  `id` varchar(36) NOT NULL,
-  `title` varchar(145) DEFAULT NULL,
-  `category_id` varchar(36) DEFAULT NULL,
-  `thumbs` int DEFAULT NULL,
-  `memo` varchar(245) DEFAULT NULL,
-  `url` varchar(245) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `creater_id` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-07-22 15:09:04
